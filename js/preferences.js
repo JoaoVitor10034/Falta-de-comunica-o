@@ -1,0 +1,6 @@
+export const notificationPreference = user => localStorage.getItem('sesi_notifications_'+user.id) || 'all';
+export const shouldToast = (user, notice) => notificationPreference(user)==='all' || notificationPreference(user)==='urgent' && notice.priority==='Urgente';
+export function bindNotificationPreferences(root,user) {
+  const section=document.createElement('section');section.className='card search-group';section.innerHTML='<h2>Preferências de notificação</h2><p class="muted">Escolha quais alertas aparecem enquanto você usa o portal. Todas as notificações continuam disponíveis no sino.</p><label for="notification-preference">Alertas na tela</label><select id="notification-preference"><option value="all">Todos os alertas</option><option value="urgent">Apenas urgentes</option><option value="silent">Silencioso</option></select><p id="notification-preference-status" role="status"></p>';
+  root.append(section);const select=section.querySelector('select');select.value=notificationPreference(user);select.onchange=()=>{try{localStorage.setItem('sesi_notifications_'+user.id,select.value);section.querySelector('[role=status]').textContent='Preferência salva neste navegador.';}catch{section.querySelector('[role=status]').textContent='Não foi possível salvar a preferência.';}};
+}

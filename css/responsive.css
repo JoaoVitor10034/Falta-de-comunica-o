@@ -1,0 +1,8 @@
+@media (max-width:767px){
+ .app{grid-template-columns:1fr}.sidebar{display:none}#toggle{display:none}.hbrand{display:block}.uname{display:none}.main{padding-bottom:96px}
+ .bottomnav{display:flex;position:fixed;bottom:0;left:0;right:0;background:#fff;border-top:1px solid var(--line);z-index:40;padding-bottom:env(safe-area-inset-bottom)}
+ .bottomnav a{flex:1;display:flex;flex-direction:column;align-items:center;padding:8px 2px;font-size:.7rem;font-weight:700;text-decoration:none;color:var(--muted);transition:color .15s}
+ .bottomnav a[aria-current=page]{color:var(--blue)}.bottomnav .ico{display:grid;place-items:center}
+ .hist-row{flex-direction:column}.receipt{text-align:left}
+}
+@media (min-width:1440px){.main{max-width:1320px}}

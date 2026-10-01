@@ -1,0 +1,4 @@
+*,*::before,*::after{box-sizing:border-box}body,h1,h2,h3,p,ul{margin:0}ul{padding:0;list-style:none}img{max-width:100%}button,input,select,textarea{font:inherit;color:inherit}a{color:inherit}
+:focus-visible{outline:3px solid #f2a900;outline-offset:2px}
+@media (prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important;transition:none!important}}
+[hidden]{display:none!important}

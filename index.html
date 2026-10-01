@@ -1,0 +1,5 @@
+<!doctype html><html lang="pt-BR"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Portal Escolar SESI</title><meta name="theme-color" content="#087443"><link rel="manifest" href="manifest.json"></head><body><p id="status" role="status">Preparando seu portal…</p><script type="module">
+import { getProfile } from './js/auth.js';
+try { location.replace(await getProfile() ? 'dashboard.html' : 'login.html'); }
+catch { document.querySelector('#status').textContent = 'Não foi possível verificar sua sessão. Recarregue para tentar novamente.'; }
+</script><noscript>Ative o JavaScript para acessar o Portal SESI.</noscript></body></html>

@@ -1,0 +1,28 @@
+<!doctype html><html lang="pt-BR"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Entrar — Portal SESI</title>
+<script src="js/theme.js"></script><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Figtree:wght@400;600;700;800&display=swap">
+<link rel="stylesheet" href="css/variables.css"><link rel="stylesheet" href="css/reset.css"><link rel="stylesheet" href="css/global.css"><link rel="stylesheet" href="css/components.css">
+<link rel="stylesheet" href="css/login.css"><link rel="stylesheet" href="css/themes.css"><link rel="stylesheet" href="css/portal.css"><link rel="manifest" href="manifest.json"><meta name="theme-color" content="#087443"></head>
+<body><div class="lw"><section class="lb"><span class="mk">SESI</span><h2>Prazos, avisos e materiais no mesmo lugar.</h2><p>Veja o que vence hoje, o que mudou na sala e o que vem pela frente.</p></section>
+<main class="lf"><form id="f"><h1>Entrar</h1><p class="muted">Use seu e-mail escolar.</p>
+<label for="email">E-mail</label><input id="email" type="email" required autocomplete="username">
+<label for="pw">Senha</label><input id="pw" type="password" autocomplete="current-password">
+<p class="error" id="err" role="alert"></p><div class="actions"><button class="btn" style="width:100%">Entrar</button></div>
+<div class="hint" id="hint" hidden style="background:var(--blue-soft);padding:10px;border-radius:8px;font-size:.85rem;margin-top:16px"><strong>Modo demo</strong> (qualquer senha): aluno@demo, aluno2@demo, prof@demo, monitor@demo, admin@demo</div></form></main></div>
+<script type="module">
+import { login, getProfile } from './js/auth.js'; import { isDemo } from './js/supabase.js';
+const destination = () => { const hash = sessionStorage.getItem('sesi_return') || ''; sessionStorage.removeItem('sesi_return'); return 'dashboard.html' + (hash.startsWith('#/') ? hash : ''); };
+if (await getProfile()) location.href = destination();
+document.getElementById('hint').hidden = !isDemo;
+if (isDemo) {
+  const { DEMO_TEACHERS } = await import('./js/demoAccounts.js');
+  const hint = document.getElementById('hint');
+  hint.innerHTML = '<strong>Modo demo — qualquer senha</strong><p>Alunos: aluno@demo, aluno2@demo até aluno6@demo.</p><p>Monitores: monitor@demo, monitor2@demo até monitor4@demo.</p><p>Administrador: admin@demo.</p><details><summary>Ver professores por disciplina</summary><ul></ul></details>';
+  for (const teacher of DEMO_TEACHERS) {
+    const item = document.createElement('li');
+    item.textContent = teacher.subject_name + ': ' + teacher.email;
+    hint.querySelector('ul').append(item);
+  }
+}
+document.getElementById('f').addEventListener('submit', async e => { e.preventDefault();
+  try { await login(email.value, pw.value); location.href = destination(); } catch (x) { err.textContent = x.message; } });
+</script><script type="module" src="js/pwa.js"></script></body></html>

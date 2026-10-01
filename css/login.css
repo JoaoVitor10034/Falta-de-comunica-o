@@ -1,0 +1,52 @@
+.lw {
+  min-height: 100vh;
+  min-height: 100svh;
+  display: grid;
+  grid-template-columns: 1.1fr 1fr;
+  background: linear-gradient(90deg, rgba(5, 30, 39, .86), rgba(5, 30, 39, .42)),
+    url('../assets/images/sesi-escola.jpg') center / cover no-repeat;
+}
+.lb {
+  color: #fff;
+  padding: clamp(24px, 6vw, 72px);
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  gap: 16px;
+}
+.lb h2 {
+  font-size: clamp(1.8rem, 4vw, 3rem);
+  line-height: 1.1;
+  letter-spacing: -.03em;
+  margin: 0;
+  max-width: 16ch;
+}
+.lb p { color: #fff; max-width: 40ch; }
+.lb .mk {
+  font-weight: 800;
+  font-size: 1.4rem;
+  background: var(--green-dark);
+  border-bottom: 3px solid var(--red);
+  border-radius: 8px 8px 0 0;
+  padding: 8px 18px;
+  align-self: flex-start;
+}
+.lf { display: grid; place-items: center; padding: clamp(24px, 4vw, 56px); }
+.lf form {
+  width: min(420px, 100%);
+  background: var(--card);
+  border-top: 5px solid var(--green);
+  border-radius: 16px;
+  padding: clamp(24px, 3vw, 36px);
+  box-shadow: 0 20px 60px rgba(0, 0, 0, .28);
+  animation: enter .4s ease;
+}
+.lf h1 { color: var(--blue); }
+.lf .btn { justify-content: center; }
+.lf input:focus-visible { outline-color: var(--green); }
+@media (max-width: 767px) {
+  .lw { grid-template-columns: 1fr; background-position: 45% center; }
+  .lb { padding: 32px 24px 20px; justify-content: center; }
+  .lb h2 { max-width: 24ch; }
+  .lf { padding: 12px 24px 32px; }
+}
